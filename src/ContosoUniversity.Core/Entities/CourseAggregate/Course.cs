@@ -41,7 +41,10 @@ namespace ContosoUniversity.Core.Entities.CourseAggregate
         {
             var enrollment = _enrollments.FirstOrDefault(e => e.StudentId == studentId);
 
-            if (enrollment?.Grade == null)
+            if (enrollment == null)
+                throw new StudentNotFoundException(ExceptionMessages.StudentEnrollmentNotFound(studentId));
+
+            if (enrollment.Grade != null)
                 throw new StudentEnrollmentException(ExceptionMessages.DropStudentWithGrade);
 
             _enrollments.Remove(enrollment);
