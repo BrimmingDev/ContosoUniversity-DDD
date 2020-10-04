@@ -1,1 +1,1 @@
-# ContosoUniverisy-DDD
+# ContosoUniversity-DDD
