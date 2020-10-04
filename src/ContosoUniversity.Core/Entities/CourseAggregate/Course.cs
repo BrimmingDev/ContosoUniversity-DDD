@@ -8,6 +8,7 @@ namespace ContosoUniversity.Core.Entities.CourseAggregate
 {
     public class Course : BaseEntity, IAggregateRoot
     {
+        public int DepartmentId { get; private set; }
         public const int TitleMaxLength = 100;
         private readonly List<Enrollment> _enrollments = new List<Enrollment>();
 
@@ -16,8 +17,9 @@ namespace ContosoUniversity.Core.Entities.CourseAggregate
             // used for EF
         }
 
-        public Course(string title, int credits)
+        public Course(string title, int credits, int departmentId)
         {
+            DepartmentId = departmentId;
             SetTitle(title);
             SetCredits(credits);
         }
@@ -73,8 +75,9 @@ namespace ContosoUniversity.Core.Entities.CourseAggregate
             enrollment.UpdateGrade(grade);
         }
 
-        public void UpdateDetails(string title, int credits)
+        public void UpdateDetails(string title, int credits, int departmentId)
         {
+            DepartmentId = departmentId;
             SetTitle(title);
             SetCredits(credits);
         }

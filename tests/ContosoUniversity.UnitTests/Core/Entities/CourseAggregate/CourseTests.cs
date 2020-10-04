@@ -19,44 +19,45 @@ namespace ContosoUniversity.UnitTests.Core.Entities.CourseAggregate
 
         [Theory]
         [AutoData]
-        public void ShouldThrowArgumentExceptionGivenNullTitle(int credits)
+        public void ShouldThrowArgumentExceptionGivenNullTitle(int credits, int departmentId)
         {
-            Should.Throw<ArgumentException>(() => new Course(" ", credits));
+            Should.Throw<ArgumentException>(() => new Course(" ", credits, departmentId));
         }
 
         [Theory]
         [AutoData]
-        public void ShouldThrowArgumentNullExceptionGivenNullTitle(int credits)
+        public void ShouldThrowArgumentNullExceptionGivenNullTitle(int credits, int departmentId)
         {
-            Should.Throw<ArgumentNullException>(() => new Course(null, credits));
+            Should.Throw<ArgumentNullException>(() => new Course(null, credits, departmentId));
         }
 
         [Theory]
         [AutoData]
-        public void ShouldThrowArgumentOutOfRangeExceptionGivenTitleTooLong(int credits)
+        public void ShouldThrowArgumentOutOfRangeExceptionGivenTitleTooLong(int credits, int departmentId)
         {
             var longString = string.Join(string.Empty, Fixture.CreateMany<char>(Course.TitleMaxLength + 1));
 
-            Should.Throw<ArgumentOutOfRangeException>(() => new Course(longString, credits));
+            Should.Throw<ArgumentOutOfRangeException>(() => new Course(longString, credits, departmentId));
         }
 
         [Theory]
         [InlineAutoData(0)]
         [InlineAutoData(-1)]
-        public void ShouldThrowArgumentExceptionGivenNegativeOrZeroCredits(int credits, string title)
+        public void ShouldThrowArgumentExceptionGivenNegativeOrZeroCredits(int credits, string title, int departmentId)
         {
-            Should.Throw<ArgumentException>(() => new Course(title, credits));
+            Should.Throw<ArgumentException>(() => new Course(title, credits, departmentId));
         }
 
         [Theory]
         [AutoData]
-        public void ShouldCreateCourseGivenValidParameters(string title, int credits)
+        public void ShouldCreateCourseGivenValidParameters(string title, int credits, int departmentId)
         {
-            var course = new Course(title, credits);
+            var course = new Course(title, credits, departmentId);
 
             course.Active.ShouldBeTrue();
             course.Title.ShouldBe(title);
             course.Credits.ShouldBe(credits);
+            course.DepartmentId.ShouldBe(departmentId);
         }
 
         [Theory]
@@ -171,12 +172,14 @@ namespace ContosoUniversity.UnitTests.Core.Entities.CourseAggregate
 
         [Theory]
         [AutoData]
-        public void UpdateDetails_ShouldUpdateCourseDetails(Course sut, string updatedTitle, int updatedCredits)
+        public void UpdateDetails_ShouldUpdateCourseDetails(Course sut, string updatedTitle, int updatedCredits,
+            int updatedDepartmentId)
         {
-            sut.UpdateDetails(updatedTitle, updatedCredits);
+            sut.UpdateDetails(updatedTitle, updatedCredits, updatedDepartmentId);
 
             sut.Title.ShouldBe(updatedTitle);
             sut.Credits.ShouldBe(updatedCredits);
+            sut.DepartmentId.ShouldBe(updatedDepartmentId);
         }
     }
 }
