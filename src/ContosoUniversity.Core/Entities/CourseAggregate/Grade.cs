@@ -1,6 +1,8 @@
-﻿namespace ContosoUniversity.Core.Entities.CourseAggregate
+﻿using Ardalis.SmartEnum;
+
+namespace ContosoUniversity.Core.Entities.CourseAggregate
 {
-    public abstract class Grade : Enumeration
+    public abstract class Grade : SmartEnum<Grade>
     {
         public static readonly Grade A = new AGrade();
         public static readonly Grade AMinus = new AMinusGrade();
@@ -15,7 +17,7 @@
         public static readonly Grade DMinus = new DMinusGrade();
         public static readonly Grade F = new FGrade();
 
-        protected Grade(int id, string name) : base(id, name)
+        protected Grade(int id, string name) : base(name, id)
         {
         }
 
