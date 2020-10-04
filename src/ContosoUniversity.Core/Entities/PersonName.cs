@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ardalis.GuardClauses;
 
-namespace ContosoUniversity.Core.Entities.StudentAggregate
+namespace ContosoUniversity.Core.Entities
 {
     public class PersonName : ValueObject
     {

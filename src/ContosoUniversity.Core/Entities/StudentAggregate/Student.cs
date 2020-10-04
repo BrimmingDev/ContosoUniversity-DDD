@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ContosoUniversity.Core.Interfaces;
+﻿using ContosoUniversity.Core.Interfaces;
 
 namespace ContosoUniversity.Core.Entities.StudentAggregate
 {
